@@ -1,6 +1,6 @@
 {
   "name": "wesa",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Armin Sebastian",
   "description": "Browser extension storage schema migration",
   "license": "MIT",
