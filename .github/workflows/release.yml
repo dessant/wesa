@@ -1,15 +1,14 @@
 name: Create release
 
 on:
-  create:
+  push:
     tags:
-      - 'v*.*'
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
   release:
     name: Release on GitHub
     runs-on: ubuntu-20.04
-    if: contains(github.ref, '.')
     permissions:
       contents: write
     steps:
@@ -23,5 +22,5 @@ jobs:
         with:
           tag_name: ${{ steps.release_info.outputs.TAG }}
           name: ${{ steps.release_info.outputs.TAG }}
-          body: |
+          body: >
             Learn more about this release from the [changelog](https://github.com/dessant/wesa/blob/master/CHANGELOG.md#changelog).
