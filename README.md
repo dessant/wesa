@@ -17,7 +17,7 @@ please consider contributing with
 ## Installation
 
 ```sh
-npm install wesa webextension-polyfill
+npm install wesa
 ```
 
 ## Usage
@@ -52,13 +52,12 @@ wesa init
 wesa revision -m "Revision description"
 ```
 
-A revision module will be created at `storage/revisions`, edit the `upgrade`
-function to declare storage changes.
+A revision module will be created at `storage/revisions`.
+Import the dependencies that are needed to perform the revision
+and edit the `upgrade` function to declare storage changes.
 
 A revision is made by modifying the `changes` object, which is persisted
-to storage at the end of the function. You also have direct access
-to the extension storage through the `storage` object, and you can
-import any module that is needed to perform the revision.
+to storage at the end of the function.
 
 ```js
 async function upgrade() {
@@ -68,7 +67,7 @@ async function upgrade() {
   // changes.color = '#fff'
 
   changes.storageVersion = revision;
-  return storage.set(changes);
+  return browser.storage.local.set(changes);
 }
 ```
 
@@ -78,7 +77,21 @@ Call `migrate` from the background script to perform a migration.
 import {migrate} from 'wesa';
 
 async function init() {
-  const context = require.context('storage', true, /\.(?:js|json)$/i);
+  const context = {
+    getAvailableRevisions: async ({area} = {}) =>
+      (
+        await import(/* webpackMode: "eager" */ 'storage/config.json', {
+          assert: {type: 'json'}
+        })
+      ).revisions[area],
+    getCurrentRevision: async ({area} = {}) =>
+      (await browser.storage[area].get('storageVersion')).storageVersion,
+    getRevision: async ({area, revision} = {}) =>
+      import(
+        /* webpackMode: "eager" */ `storage/revisions/${area}/${revision}.js`
+      )
+  };
+
   await migrate(context, {area: 'local'});
 }
 
@@ -87,7 +100,7 @@ init();
 
 ## License
 
-Copyright (c) 2021 Armin Sebastian
+Copyright (c) 2022 Armin Sebastian
 
 This software is released under the terms of the MIT License.
 See the [LICENSE](LICENSE) file for further information.

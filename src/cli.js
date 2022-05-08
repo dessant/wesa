@@ -1,15 +1,17 @@
 #! /usr/bin/env node
 
-const path = require('path');
-const {existsSync, writeFileSync} = require('fs');
+import path from 'node:path';
+import {existsSync, writeFileSync} from 'node:fs';
 
-const {ensureDirSync, readJsonSync, writeJsonSync} = require('fs-extra');
-const dateFormat = require('dateformat');
-const filenamify = require('filenamify');
-const yargs = require('yargs');
+import pkg from 'fs-extra';
+const {ensureDirSync, readJsonSync, writeJsonSync} = pkg;
+import dateFormat from 'dateformat';
+import filenamify from 'filenamify';
+import yargs from 'yargs';
+import {hideBin} from 'yargs/helpers';
 
 function generateRevisionId(message) {
-  const dateField = dateFormat(new Date(), 'yyyymmddHHMMss', true);
+  const dateField = dateFormat(new Date(), 'UTC:yyyymmddHHMMss');
   const messageField = filenamify(message, {replacement: '', maxLength: 35})
     .trim()
     .replace(/ +/g, '_')
@@ -56,31 +58,20 @@ Run "wesa init" to create a repository.`);
     throw new Error(`Revision ID already exists`);
   }
 
-  const downRevisionId = config.revisions[storageArea].slice(-1)[0];
-
   config.revisions[storageArea].push(revisionId);
 
-  const revision = `import browser from 'webextension-polyfill';
-
-const message = '${message}';
+  const revision = `const message = '${message}';
 
 const revision = '${revisionId}';
-const downRevision = ${downRevisionId ? `'${downRevisionId}'` : null};
-
-const storage = browser.storage.${storageArea};
 
 async function upgrade() {
   const changes = {};
 
   changes.storageVersion = revision;
-  return storage.set(changes);
+  return browser.storage.${storageArea}.set(changes);
 }
 
-export {
-  message,
-  revision,
-  upgrade
-};
+export {message, revision, upgrade};
 `;
 
   const revisionsDir = path.join(repoDir, 'revisions', storageArea);
@@ -96,7 +87,7 @@ export {
 Location: ${revisionPath}`);
 }
 
-yargs
+yargs(hideBin(process.argv))
   .command(
     'init',
     'Create a new repository for storage revisions',
@@ -149,4 +140,5 @@ yargs
   .alias('help', 'h')
   .version()
   .alias('version', 'v')
-  .strict().argv;
+  .strict()
+  .parse();

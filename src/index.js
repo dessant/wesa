@@ -1,18 +1,8 @@
-import browser from 'webextension-polyfill';
 import {indexOf, last, slice} from 'lodash-es';
 
-async function storageRevision(area = 'local') {
-  const {storageVersion} = await browser.storage[area].get('storageVersion');
-  return storageVersion;
-}
-
-async function getRevisions(context, area) {
-  return context('./config.json').revisions[area];
-}
-
 async function upgrade(context, {area = 'local'} = {}) {
-  const revisions = await getRevisions(context, area);
-  const fromRev = await storageRevision(area);
+  const revisions = await context.getAvailableRevisions({area});
+  const fromRev = await context.getCurrentRevision({area});
   const toRev = last(revisions);
 
   if (fromRev === toRev) {
@@ -28,7 +18,7 @@ async function upgrade(context, {area = 'local'} = {}) {
   console.log(`Migrating storage (${area}): ${fromRev} => ${toRev}`);
 
   for (const revisionId of migrationPath) {
-    const revision = context(`./revisions/${area}/${revisionId}.js`);
+    const revision = await context.getRevision({area, revision: revisionId});
     console.log(
       `Applying revision (${area}): ${revision.revision} - ${revision.message}`
     );

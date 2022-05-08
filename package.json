@@ -9,6 +9,7 @@
     "url": "https://github.com/dessant/wesa.git",
     "type": "git"
   },
+  "type": "module",
   "main": "src/index.js",
   "bin": {
     "wesa": "src/cli.js"
