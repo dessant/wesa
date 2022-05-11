@@ -1,9 +1,8 @@
+/.assets/
+/storage/
+
 node_modules/
 
-.assets/
-storage/
+/.vscode
 
-npm-debug.log
-yarn-debug.log
-yarn-error.log
-.yarn-integrity
+/npm-debug.log
