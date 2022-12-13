@@ -5,15 +5,6 @@
 Wesa enables you to perform storage schema migrations
 for browser extensions packaged with webpack.
 
-## Supporting the Project
-
-The continued development of Wesa is made possible
-thanks to the support of awesome backers. If you'd like to join them,
-please consider contributing with
-[Patreon](https://armin.dev/go/patreon?pr=wesa&src=repo),
-[PayPal](https://armin.dev/go/paypal?pr=wesa&src=repo) or
-[Bitcoin](https://armin.dev/go/bitcoin?pr=wesa&src=repo).
-
 ## Installation
 
 ```sh
