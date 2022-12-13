@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/dessant/wesa/compare/v0.2.0...v0.3.0) (2022-12-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* requires Node.js 18
+
+### Bug Fixes
+
+* update dependencies ([388feda](https://github.com/dessant/wesa/commit/388fedae95454bc234a8c19ff7d0437ef241eff5))
+
 ## [0.2.0](https://github.com/dessant/wesa/compare/v0.1.2...v0.2.0) (2022-05-08)
 
 
