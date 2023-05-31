@@ -2,7 +2,10 @@
 /storage/
 
 node_modules/
+/npm-debug.log
 
 /.vscode
 
-/npm-debug.log
+xcuserdata/
+
+.DS_Store
