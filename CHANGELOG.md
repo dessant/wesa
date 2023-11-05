@@ -1,6 +1,13 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
+
+## [0.3.2](https://github.com/dessant/wesa/compare/v0.3.1...v0.3.2) (2023-11-05)
+
+
+### Bug Fixes
+
+* update dependencies ([93b3ff7](https://github.com/dessant/wesa/commit/93b3ff76d24650bdbf5e468856f4173574ba9eef))
 
 ### [0.3.1](https://github.com/dessant/wesa/compare/v0.3.0...v0.3.1) (2023-05-31)
 
