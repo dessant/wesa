@@ -72,7 +72,7 @@ async function init() {
     getAvailableRevisions: async ({area} = {}) =>
       (
         await import(/* webpackMode: "eager" */ 'storage/config.json', {
-          assert: {type: 'json'}
+          with: {type: 'json'}
         })
       ).revisions[area],
     getCurrentRevision: async ({area} = {}) =>
