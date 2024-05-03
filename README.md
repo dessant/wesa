@@ -91,7 +91,7 @@ init();
 
 ## License
 
-Copyright (c) 2021-2023 Armin Sebastian
+Copyright (c) 2021-2024 Armin Sebastian
 
 This software is released under the terms of the MIT License.
 See the [LICENSE](LICENSE) file for further information.
