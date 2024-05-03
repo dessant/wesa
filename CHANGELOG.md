@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.4.0](https://github.com/dessant/wesa/compare/v0.3.2...v0.4.0) (2024-05-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* requires Node.js 20
+
+### Bug Fixes
+
+* update dependencies ([ffb0829](https://github.com/dessant/wesa/commit/ffb0829da31f9ba4452ff1def370fa9eda0721b4))
+
 ## [0.3.2](https://github.com/dessant/wesa/compare/v0.3.1...v0.3.2) (2023-11-05)
 
 
