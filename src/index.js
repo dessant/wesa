@@ -1,6 +1,6 @@
 import {indexOf, last, slice} from 'lodash-es';
 
-async function upgrade(context, {area = 'local'} = {}) {
+async function upgrade(context, {area = 'local', data = null} = {}) {
   const revisions = await context.getAvailableRevisions({area});
   const fromRev = await context.getCurrentRevision({area});
   const toRev = last(revisions);
@@ -22,12 +22,12 @@ async function upgrade(context, {area = 'local'} = {}) {
     console.log(
       `Applying revision (${area}): ${revision.revision} - ${revision.message}`
     );
-    await revision.upgrade();
+    await revision.upgrade(data);
   }
 }
 
-async function migrate(context, {area = 'local'} = {}) {
-  return upgrade(context, {area});
+async function migrate(context, {area = 'local', data = null} = {}) {
+  return upgrade(context, {area, data});
 }
 
 export {migrate, upgrade};
