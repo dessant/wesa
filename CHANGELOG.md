@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.5.0](https://github.com/dessant/wesa/compare/v0.4.0...v0.5.0) (2024-05-14)
+
+
+### Features
+
+* pass data to upgrade function ([42424e6](https://github.com/dessant/wesa/commit/42424e62b99967924cb5780a6b239dedd400c1b6))
+
 ## [0.4.0](https://github.com/dessant/wesa/compare/v0.3.2...v0.4.0) (2024-05-03)
 
 
