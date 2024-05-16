@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.6.0](https://github.com/dessant/wesa/compare/v0.5.0...v0.6.0) (2024-05-16)
+
+
+### Features
+
+* add silent option ([7edcda2](https://github.com/dessant/wesa/commit/7edcda2ef9c4dd8b965237f5b9dd4e91ce2b5c76))
+
 ## [0.5.0](https://github.com/dessant/wesa/compare/v0.4.0...v0.5.0) (2024-05-14)
 
 
