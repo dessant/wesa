@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.6.1](https://github.com/dessant/wesa/compare/v0.6.0...v0.6.1) (2024-12-09)
+
+
+### Bug Fixes
+
+* update dependencies ([c76a134](https://github.com/dessant/wesa/commit/c76a134ecc23da8f5c7638c300a71ee65b294b11))
+
 ## [0.6.0](https://github.com/dessant/wesa/compare/v0.5.0...v0.6.0) (2024-05-16)
 
 
