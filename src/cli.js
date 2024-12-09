@@ -1,10 +1,9 @@
 #! /usr/bin/env node
 
 import path from 'node:path';
-import {existsSync, writeFileSync} from 'node:fs';
+import {writeFile} from 'node:fs/promises';
 
-import pkg from 'fs-extra';
-const {ensureDirSync, readJsonSync, writeJsonSync} = pkg;
+import {pathExists, ensureDir, readJson, writeJson} from 'fs-extra/esm';
 import dateFormat from 'dateformat';
 import filenamify from 'filenamify';
 import yargs from 'yargs';
@@ -20,31 +19,31 @@ function generateRevisionId(message) {
   return `${dateField}_${messageField}`;
 }
 
-function initRepository(argv) {
+async function initRepository(argv) {
   const repoDir = path.resolve(argv.location);
   const configPath = path.join(repoDir, 'config.json');
 
-  if (existsSync(configPath)) {
+  if (await pathExists(configPath)) {
     throw new Error('Repository already exists');
   }
 
-  ensureDirSync(repoDir);
+  await ensureDir(repoDir);
 
-  const config = {revisions: {local: [], sync: []}};
-  writeJsonSync(configPath, config, {spaces: 2});
+  const config = {revisions: {local: [], session: [], sync: []}};
+  await writeJson(configPath, config, {spaces: 2});
 
   console.log(`Repository has been created
 
 Location: ${repoDir}`);
 }
 
-function createRevision(argv) {
+async function createRevision(argv) {
   const {message, storage: storageArea} = argv;
 
   const repoDir = path.resolve(argv.location);
   const configPath = path.join(repoDir, 'config.json');
 
-  if (!existsSync(configPath)) {
+  if (!(await pathExists(configPath))) {
     throw new Error(`Repository does not exist
 
 Run "wesa init" to create a repository.`);
@@ -52,7 +51,7 @@ Run "wesa init" to create a repository.`);
 
   const revisionId = generateRevisionId(message);
 
-  const config = readJsonSync(configPath);
+  const config = await readJson(configPath);
 
   if (config.revisions[storageArea].includes(revisionId)) {
     throw new Error(`Revision ID already exists`);
@@ -75,12 +74,12 @@ export {message, revision, upgrade};
 `;
 
   const revisionsDir = path.join(repoDir, 'revisions', storageArea);
-  ensureDirSync(revisionsDir);
+  await ensureDir(revisionsDir);
 
   const revisionPath = path.join(revisionsDir, `${revisionId}.js`);
-  writeFileSync(revisionPath, revision);
+  await writeFile(revisionPath, revision);
 
-  writeJsonSync(configPath, config, {spaces: 2});
+  await writeJson(configPath, config, {spaces: 2});
 
   console.log(`Storage revision has been created
 
@@ -126,7 +125,7 @@ yargs(hideBin(process.argv))
       storage: {
         alias: 's',
         describe: 'Storage area',
-        choices: ['local', 'sync'],
+        choices: ['local', 'session', 'sync'],
         default: 'local',
         requiresArg: true,
         type: 'string',

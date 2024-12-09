@@ -33,7 +33,7 @@ Options:
   -m, --message   Revision description                       [string] [required]
   -l, --location  Repository location              [string] [default: "storage"]
   -s, --storage   Storage area
-                          [string] [choices: "local", "sync"] [default: "local"]
+               [string] [choices: "local", "session", "sync"] [default: "local"]
 ```
 
 Initiate a repository that will hold revisions and create your first revision.
